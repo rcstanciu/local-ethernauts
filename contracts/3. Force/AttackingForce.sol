@@ -10,6 +10,8 @@ contract AttackingForce {
     }
 
     function hackContract() external {
-        // Code me!
+        // Since selfdestruct runs at EVM level, there are no ways
+        // to prevent a contract from receiving ETH.
+        selfdestruct(payable(contractAddress));
     }
 }
